@@ -155,16 +155,11 @@
 
     .center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-    .left, .right {
-      bottom: 5%;
-      max-width: 300px; /* bigger SpongeBob & Kermit */
-    }
-
     /* Spinning cat zoom animation */
     @keyframes zoomInOut {
       0% { transform: translateX(-50%) scale(0); opacity: 0; }
-      40% { transform: translateX(-50%) scale(3); opacity: 1; } /* very large */
-      100% { transform: translateX(-50%) scale(1.5); opacity: 1; } /* settle bigger */
+      40% { transform: translateX(-50%) scale(3); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1.5); opacity: 1; }
     }
 
     .jump-zoom {
@@ -222,18 +217,14 @@
       // Cake explode
       showGif("cake", "cake explode.gif", "center");
 
-      // 🐱 Spinning cat after 2.5s with zoom effect
-      setTimeout(() => {
-        showGif("cat", "spinning cat.gif", "jump-zoom");
-      }, 2500);
+      // Spinning cat at 2.5s, 11s, 26s
+      [2500, 11000, 26000].forEach(delay => {
+        setTimeout(() => {
+          showGif("cat", "spinning cat.gif", "jump-zoom");
+        }, delay);
+      });
 
-      // 🧽🐸 SpongeBob + Kermit after 11s
-      setTimeout(() => {
-        showGif("spongebob", "spongebob.gif", "left");
-        showGif("kermit", "kermit.gif", "right");
-      }, 11000);
-
-      // Remove all after 41s
+      // Remove all GIFs after 41s
       setTimeout(() => {
         document.getElementById("gif-area").innerHTML = "";
       }, 41000);
@@ -247,10 +238,13 @@
     function showGif(id, src, position) {
       const gifArea = document.getElementById("gif-area");
       const img = document.createElement("img");
-      img.id = id;
+      img.id = id + "-" + Date.now();
       img.src = src;
       img.className = "gif " + position;
       gifArea.appendChild(img);
+
+      // Remove GIF after 7s
+      setTimeout(() => img.remove(), 7000);
     }
 
     function createConfetti() {
