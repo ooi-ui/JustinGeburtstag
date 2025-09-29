@@ -168,6 +168,33 @@
       transform: translateX(-50%);
       animation: zoomInOut 2s ease-out forwards;
     }
+
+    /* Kermit and SpongeBob flying animations */
+    @keyframes flyLeftToRight {
+      0% { transform: translateX(-100vw) translateY(0); }
+      100% { transform: translateX(100vw) translateY(0); }
+    }
+
+    @keyframes flyRightToLeft {
+      0% { transform: translateX(100vw) translateY(0); }
+      100% { transform: translateX(-100vw) translateY(0); }
+    }
+
+    .fly-ltr {
+      position: fixed;
+      top: 20%;
+      max-width: 150px;
+      animation: flyLeftToRight 8s linear forwards;
+      z-index: 1600;
+    }
+
+    .fly-rtl {
+      position: fixed;
+      top: 50%;
+      max-width: 150px;
+      animation: flyRightToLeft 8s linear forwards;
+      z-index: 1600;
+    }
   </style>
 </head>
 <body>
@@ -224,7 +251,10 @@
         }, delay);
       });
 
-      // Remove all GIFs (cake + cat) after 41s
+      // Fly Kermit and SpongeBob at random times
+      flyCharacters();
+
+      // Remove all GIFs after 41s
       setTimeout(() => {
         document.getElementById("gif-area").innerHTML = "";
       }, 41000);
@@ -242,8 +272,6 @@
       img.src = src;
       img.className = "gif " + position;
       gifArea.appendChild(img);
-
-      // No removal here; all GIFs removed after 41s
     }
 
     function createConfetti() {
@@ -256,6 +284,30 @@
       confetti.style.animationDuration = Math.random() * 3 + 2 + "s";
       document.body.appendChild(confetti);
       setTimeout(() => confetti.remove(), 5000);
+    }
+
+    function flyCharacters() {
+      const gifArea = document.getElementById("gif-area");
+
+      // Random times between 3s and 41s
+      const kermitTime = 3000 + Math.random() * 38000;
+      const spongebobTime = 3000 + Math.random() * 38000;
+
+      setTimeout(() => {
+        const kermit = document.createElement("img");
+        kermit.src = "kermit.gif";
+        kermit.className = "fly-ltr";
+        gifArea.appendChild(kermit);
+        setTimeout(() => kermit.remove(), 8000);
+      }, kermitTime);
+
+      setTimeout(() => {
+        const spongebob = document.createElement("img");
+        spongebob.src = "spongebob.gif";
+        spongebob.className = "fly-rtl";
+        gifArea.appendChild(spongebob);
+        setTimeout(() => spongebob.remove(), 8000);
+      }, spongebobTime);
     }
 
     // Auto-close modal after 3 seconds
