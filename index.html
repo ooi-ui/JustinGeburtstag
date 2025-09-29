@@ -154,28 +154,24 @@
     }
 
     .center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
-    .side { top: 20%; left: 5%; animation: floatBalloon 6s ease-in-out infinite; }
-    .jump { bottom: 10%; left: 50%; transform: translateX(-50%); animation: jumpOut 1s ease-out forwards; }
-    .left { bottom: 5%; left: 10%; }
-    .right { bottom: 5%; right: 10%; }
 
-    .sparkle-left { top: 30%; left: 0; max-width: 150px; animation: fadeOut 4s forwards; }
-    .sparkle-right { top: 30%; right: 0; max-width: 150px; animation: fadeOut 4s forwards; }
-
-    @keyframes floatBalloon {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-50px); }
-      100% { transform: translateY(0); }
+    .left, .right {
+      bottom: 5%;
+      max-width: 300px; /* bigger SpongeBob & Kermit */
     }
 
-    @keyframes jumpOut {
+    /* Spinning cat zoom animation */
+    @keyframes zoomInOut {
       0% { transform: translateX(-50%) scale(0); opacity: 0; }
-      100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      40% { transform: translateX(-50%) scale(3); opacity: 1; } /* very large */
+      100% { transform: translateX(-50%) scale(1.5); opacity: 1; } /* settle bigger */
     }
 
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; }
+    .jump-zoom {
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: zoomInOut 2s ease-out forwards;
     }
   </style>
 </head>
@@ -226,23 +222,12 @@
       // Cake explode
       showGif("cake", "cake explode.gif", "center");
 
-      // Sparkles
-      showGif("sparkle-left", "sparkle.gif", "sparkle-left");
-      showGif("sparkle-right", "sparkle.gif", "sparkle-right");
+      // 🐱 Spinning cat after 2.5s with zoom effect
       setTimeout(() => {
-        document.getElementById("sparkle-left")?.remove();
-        document.getElementById("sparkle-right")?.remove();
-      }, 4000);
-
-      // Balloons
-      showGif("balloons", "balloon.gif", "side");
-
-      // Spinning cat after 2.5s
-      setTimeout(() => {
-        showGif("cat", "spinning cat.gif", "jump");
+        showGif("cat", "spinning cat.gif", "jump-zoom");
       }, 2500);
 
-      // SpongeBob + Kermit after 11s
+      // 🧽🐸 SpongeBob + Kermit after 11s
       setTimeout(() => {
         showGif("spongebob", "spongebob.gif", "left");
         showGif("kermit", "kermit.gif", "right");
