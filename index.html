@@ -224,7 +224,7 @@
         }, delay);
       });
 
-      // Remove all GIFs after 41s
+      // Remove all GIFs (cake + cat) after 41s
       setTimeout(() => {
         document.getElementById("gif-area").innerHTML = "";
       }, 41000);
@@ -243,8 +243,7 @@
       img.className = "gif " + position;
       gifArea.appendChild(img);
 
-      // Remove GIF after 7s
-      setTimeout(() => img.remove(), 7000);
+      // No removal here; all GIFs removed after 41s
     }
 
     function createConfetti() {
