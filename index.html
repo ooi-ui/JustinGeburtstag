@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alles Gute zum Geburtstag Justin!</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        .birthday-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .birthday-title {
+            font-size: 2.5rem;
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+        }
+
+        .birthday-message {
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .gif-container {
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: inline-block;
+        }
+
+        .birthday-gif {
+            width: 300px;
+            height: auto;
+            display: block;
+        }
+
+        .celebration-button {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 1rem;
+        }
+
+        .celebration-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confetti-fall 3s linear infinite;
+            z-index: 1000;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .close-modal {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* GIF Area */
+        #gif-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+        }
+
+        .gif {
+            position: absolute;
+            max-width: 200px;
+        }
+
+        .center { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .side { top: 20%; left: 5%; animation: floatBalloon 6s ease-in-out infinite; }
+        .jump { bottom: 10%; left: 50%; transform: translateX(-50%); animation: jumpOut 1s ease-out forwards; }
+        .left { bottom: 5%; left: 10%; }
+        .right { bottom: 5%; right: 10%; }
+
+        .sparkle-left { top: 30%; left: 0; max-width: 150px; animation: fadeOut 4s forwards; }
+        .sparkle-right { top: 30%; right: 0; max-width: 150px; animation: fadeOut 4s forwards; }
+
+        @keyframes floatBalloon {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-50px); }
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes jumpOut {
+            0% { transform: translateX(-50%) scale(0); opacity: 0; }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            .birthday-container { padding: 2rem; margin: 1rem; }
+            .birthday-title { font-size: 2rem; }
+            .birthday-gif { width: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Birthday Modal -->
+    <div id="birthdayModal" class="modal" style="display: block;">
+        <div class="modal-content">
+            <h2 style="color: #4a5568; margin-bottom: 1rem;">🎉 Geburtstagsgruß 🎉</h2>
+            <p style="font-size: 1.1rem; color: #718096;">Herzlichen Glückwunsch zum Geburtstag, Justin!</p>
+            <button class="close-modal" onclick="closeModal()">Weiter zur Feier! 🎂</button>
+        </div>
+    </div>
+
+    <!-- Main Birthday Content -->
+    <div class="birthday-container">
+        <h1 class="birthday-title">🎉 Alles Gute zum Geburtstag Justin! 🎉</h1>
+        <p class="birthday-message">
+            Wir wünschen dir einen fantastischen Tag voller Freude, Lachen und all deinen Lieblingssachen!
+        </p>
+        <div class="gif-container">
+            <img src="https://media.tenor.com/XbP1DZ6PKBsAAAAM/birthday-cat.gif" 
+                 alt="Birthday Cat Animation" 
+                 class="birthday-gif"
+                 onerror="this.src=''; this.alt='Birthday cat animation failed to load'; this.style.display='none';">
+        </div>
+        <button class="celebration-button" onclick="celebrate()">🎊 Lass uns feiern! 🎊</button>
+    </div>
+
+    <!-- GIF Area -->
+    <div id="gif-area"></div>
+
+    <!-- Audio -->
+    <audio id="birthdayMusic" src="birthday.m4a" preload="auto"></audio>
+
+    <script>
+        function closeModal() {
+            document.getElementById('birthdayModal').style.display = 'none';
+        }
+
+        function celebrate() {
+            const music = document.getElementById("birthdayMusic");
+            music.volume = 0.3;
+            music.play();
+
+            // Confetti
+            for (let i = 0; i < 50; i++) createConfetti();
+
+            // Cake explode
+            showGif("cake", "https://media.giphy.com/media/26AHONQ79FdWZhAI0/giphy.gif", "center");
+
+            // Sparkles left + right
+            showGif("sparkle-left", "https://media.giphy.com/media/26BRrSvJUa0crqw4E/giphy.gif", "sparkle-left");
+            showGif("sparkle-right", "https://media.giphy.com/media/26BRrSvJUa0crqw4E/giphy.gif", "sparkle-right");
+
+            setTimeout(() => {
+                document.getElementById("sparkle-left")?.remove();
+                document.getElementById("sparkle-right")?.remove();
+            }, 4000);
+
+            // Balloons
+            showGif("balloons", "https://media.giphy.com/media/3o6ZsY4CG1XG77oKPK/giphy.gif", "side");
+
+            // Spinning cat after 2.5s
+            setTimeout(() => {
+                showGif("cat", "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif", "jump");
+            }, 2500);
+
+            // SpongeBob + Kermit after 11s
+            setTimeout(() => {
+                showGif("spongebob", "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif", "left");
+                showGif("kermit", "https://media.giphy.com/media/krP2NRkLqnKEg/giphy.gif", "right");
+            }, 11000);
+
+            // Remove all after 41s
+            setTimeout(() => {
+                document.getElementById("gif-area").innerHTML = "";
+            }, 41000);
+
+            // Celebration alert
+            setTimeout(() => {
+                alert('🎉 Alles Gute zum Geburtstag Justin! Mögen all deine Wünsche in Erfüllung gehen! 🎂✨');
+            }, 500);
+        }
+
+        function showGif(id, src, position) {
+            const gifArea = document.getElementById("gif-area");
+            const img = document.createElement("img");
+            img.id = id;
+            img.src = src;
+            img.className = "gif " + position;
+            gifArea.appendChild(img);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff', '#5f27cd'];
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 5000);
+        }
+
+        // Auto-close modal after 3 seconds
+        setTimeout(() => {
+            if (document.getElementById('birthdayModal').style.display !== 'none') {
+                closeModal();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
